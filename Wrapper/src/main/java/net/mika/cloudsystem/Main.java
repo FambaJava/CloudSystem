@@ -15,7 +15,7 @@ public class Main {
         commandManager.registerCommand("test", new TestCommand());
 
         commandManager.registerCommand("server", new ServerCommand());
-
+        //s
         commandManager.start();
 
     }
