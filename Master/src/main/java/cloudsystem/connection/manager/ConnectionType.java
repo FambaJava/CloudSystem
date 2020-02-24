@@ -1,4 +1,4 @@
-package net.mika.cloudsystem.connection.manager;
+package cloudsystem.connection.manager;
 
 public enum ConnectionType {
 

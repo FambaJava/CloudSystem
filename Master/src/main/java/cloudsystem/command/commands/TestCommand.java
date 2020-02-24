@@ -1,6 +1,7 @@
-package net.mika.cloudsystem.command.commands;
+package cloudsystem.command.commands;
 
-import net.mika.cloudsystem.command.listener.Command;
+
+import cloudsystem.command.listener.Command;
 
 public class TestCommand implements Command {
     @Override

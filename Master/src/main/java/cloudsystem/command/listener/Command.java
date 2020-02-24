@@ -1,4 +1,4 @@
-package net.mika.cloudsystem.command.listener;
+package cloudsystem.command.listener;
 
 public interface Command {
 

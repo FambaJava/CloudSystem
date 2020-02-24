@@ -1,6 +1,7 @@
-package net.mika.cloudsystem.command;
+package cloudsystem.command;
 
-import net.mika.cloudsystem.command.listener.Command;
+
+import cloudsystem.command.listener.Command;
 
 import java.io.BufferedReader;
 import java.io.IOException;

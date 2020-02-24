@@ -1,4 +1,4 @@
-package net.mika.cloudsystem;
+package cloudsystem;
 
 import net.mika.cloudsystem.command.CommandManager;
 import net.mika.cloudsystem.command.commands.ServerCommand;

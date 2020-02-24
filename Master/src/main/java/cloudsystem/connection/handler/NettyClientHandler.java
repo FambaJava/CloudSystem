@@ -1,10 +1,10 @@
-package net.mika.cloudsystem.connection.handler;
+package cloudsystem.connection.handler;
 
 
+import cloudsystem.datas.AdminKeyHandler;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
-import net.mika.cloudsystem.datas.AdminKeyHandler;
 
 public class NettyClientHandler extends ChannelInboundHandlerAdapter {
 

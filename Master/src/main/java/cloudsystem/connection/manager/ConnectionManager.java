@@ -1,6 +1,7 @@
-package net.mika.cloudsystem.connection.manager;
+package cloudsystem.connection.manager;
 
-import net.mika.cloudsystem.connection.NettyClientConnection;
+
+import cloudsystem.connection.NettyClientConnection;
 
 import java.util.HashMap;
 import java.util.Map;

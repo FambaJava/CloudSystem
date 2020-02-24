@@ -1,4 +1,4 @@
-package net.mika.cloudsystem.datas;
+package cloudsystem.datas;
 
 import net.mika.cloudsystem.Main;
 

@@ -1,5 +1,7 @@
-package net.mika.cloudsystem.connection;
+package cloudsystem.connection;
 
+import cloudsystem.Main;
+import cloudsystem.connection.handler.NettyClientHandler;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.*;
@@ -9,8 +11,6 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.util.CharsetUtil;
-import net.mika.cloudsystem.Main;
-import net.mika.cloudsystem.connection.handler.NettyClientHandler;
 
 public class NettyClientConnection {
 
@@ -46,7 +46,7 @@ public class NettyClientConnection {
 
             ChannelFuture channelFuture = bootstrap.connect(host, port).sync();
             channel = channelFuture.channel();
-            Main.getCommandManager().start();
+            Main.getCommandManager();
             System.out.println("Client started");
             channelFuture.channel().closeFuture().sync();
         }finally {
