@@ -7,6 +7,7 @@ import net.mika.cloudsystem.command.commands.TestCommand;
 public class Main {
 
     private static CommandManager commandManager;
+
     public static void main(String[] args) {
 
         commandManager = new CommandManager();

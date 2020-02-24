@@ -6,6 +6,7 @@
       <list>
         <option value="$PROJECT_DIR$/Wrapper/pom.xml" />
         <option value="$PROJECT_DIR$/Master/pom.xml" />
+        <option value="$PROJECT_DIR$/TeamSpeakBot/pom.xml" />
       </list>
     </option>
   </component>
