@@ -1,6 +1,8 @@
 package cloudsystem.command;
 
 
+import cloudsystem.command.commands.ServerCommand;
+import cloudsystem.command.commands.TestCommand;
 import cloudsystem.command.listener.Command;
 
 import java.io.BufferedReader;
@@ -21,7 +23,7 @@ public class CommandManager {
 
     private String line;
 
-    public boolean registerCommand(String name, Command commandClazz){
+    private boolean registerCommand(String name, Command commandClazz){
         try {
             commands.put(name, commandClazz);
             return true;
@@ -44,6 +46,7 @@ public class CommandManager {
     }
 
     public void start(){
+        registerCommands();
         running = true;
         thread = new Thread(()->{
                     while (running){
@@ -59,6 +62,12 @@ public class CommandManager {
 
                 }, "commandTool");
         thread.start();
+    }
+
+
+    private void registerCommands(){
+        registerCommand("test", new TestCommand());
+        registerCommand("server", new ServerCommand());
     }
 
     public void stop(){

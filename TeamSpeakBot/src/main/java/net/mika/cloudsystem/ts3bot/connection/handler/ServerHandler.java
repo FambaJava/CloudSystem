@@ -11,33 +11,33 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 
 
     @Override
-    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+    public void channelActive(ChannelHandlerContext ctx) {
         System.out.println(ctx + "connectec");
     }
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+    public void channelRead(ChannelHandlerContext ctx, Object msg) {
         ByteBuf byteBuf = (ByteBuf) msg;
         StringBuilder stringBuilder = new StringBuilder();
 
         while (byteBuf.isReadable())
-            stringBuilder.append((char)byteBuf.readByte());
+            stringBuilder.append((char) byteBuf.readByte());
 
         String message = stringBuilder.toString();
 
-        if(message.startsWith("getAdminKey")){
+        if (message.startsWith("getAdminKey")) {
             String number = message.split("")[12];
             ctx.writeAndFlush(Unpooled.copiedBuffer("key: " + Main.getTeamSpeakManager().getAdminKey(Integer.parseInt(number)), CharsetUtil.UTF_8));
-        }else if(message.equalsIgnoreCase("startBot")){
+        } else if (message.equalsIgnoreCase("startBot")) {
             Main.getTeamSpeakManager().connect();
-        }else if(message.equalsIgnoreCase("stopBot")){
+        } else if (message.equalsIgnoreCase("stopBot")) {
             Main.getTeamSpeakManager().closeConnection();
-        }else
+        } else
             System.out.println(message);
     }
 
     @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
         cause.printStackTrace();
     }
 }

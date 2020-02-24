@@ -2,36 +2,30 @@ package cloudsystem.command.commands;
 
 
 import cloudsystem.command.listener.Command;
-import cloudsystem.datas.AdminKeyHandler;
+import cloudsystem.model.TeamSpeakServer;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ServerCommand implements Command {
 
-    private final List<String> server = new ArrayList<>();
-
-
-    //Datats
-    private String host;
-    private int port;
-    private String adminKey;
-
     @Override
-    public void execute(String[] args) throws InterruptedException {
-        if(args.length != 1){
-            if(args[1].equalsIgnoreCase("ts3") && args[2].equalsIgnoreCase("list-all")){
-                try {
-                    adminKey = AdminKeyHandler.getAdminKey();
-                }catch (Exception ex){
-                    ex.printStackTrace();
-                }
-                System.out.println("Host: " + host);
-                System.out.println("Port: " + port);
-                System.out.println("Key: " + adminKey);
-            }else
+    public void execute(String[] args) {
+        if (args.length != 1) {
+            if (args[1].equalsIgnoreCase("teamspeak") && args[2].equalsIgnoreCase("list-all")) {
+                listAllTeamSpeakServers();
+            } else {
                 System.out.println("Command: server ts3 list-all");
-        }else
+            }
+        } else {
             System.out.println("Command: server ...");
+        }
+    }
+
+
+    private void listAllTeamSpeakServers() {
+        System.out.println("All teamspeak servers:");
+        System.out.println();
+        List.of(new TeamSpeakServer("test", 1, "24.235.23.1", 5001, "safh24mfsdij"))
+                .forEach(teamSpeakServer -> System.out.println(teamSpeakServer.getFullInfo()));
     }
 }

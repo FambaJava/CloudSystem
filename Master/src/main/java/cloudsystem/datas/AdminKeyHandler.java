@@ -1,6 +1,7 @@
 package cloudsystem.datas;
 
-import net.mika.cloudsystem.Main;
+
+import cloudsystem.Main;
 
 public class AdminKeyHandler {
 

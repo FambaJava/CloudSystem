@@ -1,6 +1,6 @@
 package cloudsystem.connection;
 
-import cloudsystem.Main;
+import cloudsystem.command.CommandManager;
 import cloudsystem.connection.handler.NettyClientHandler;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.Unpooled;
@@ -19,6 +19,7 @@ public class NettyClientConnection {
 
     private boolean epoll;
 
+    private CommandManager commandManager;
 
     private Channel channel;
 
@@ -26,6 +27,7 @@ public class NettyClientConnection {
         this.host = host;
         this.port = port;
         this.epoll = Epoll.isAvailable();
+        this.commandManager = new CommandManager();
     }
 
     public void connect() throws InterruptedException {
@@ -46,7 +48,7 @@ public class NettyClientConnection {
 
             ChannelFuture channelFuture = bootstrap.connect(host, port).sync();
             channel = channelFuture.channel();
-            Main.getCommandManager();
+            commandManager.start();
             System.out.println("Client started");
             channelFuture.channel().closeFuture().sync();
         }finally {
