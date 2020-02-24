@@ -16,12 +16,15 @@ public class ServerCommand implements Command {
     private int port;
     private String adminKey;
 
-    private AdminKeyHandler adminKeyHandler = new AdminKeyHandler();
-
     @Override
-    public void execute(String[] args) {
+    public void execute(String[] args) throws InterruptedException {
         if(args.length != 1){
             if(args[1].equalsIgnoreCase("list")){
+                try {
+                    adminKey = AdminKeyHandler.getAdminKey();
+                }catch (Exception ex){
+                    ex.printStackTrace();
+                }
                 System.out.println("Host: " + host);
                 System.out.println("Port: " + port);
                 System.out.println("Key: " + adminKey);

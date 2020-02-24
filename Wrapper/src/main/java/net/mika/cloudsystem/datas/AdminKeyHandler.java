@@ -1,8 +1,6 @@
 package net.mika.cloudsystem.datas;
 
-import io.netty.buffer.Unpooled;
-import io.netty.util.CharsetUtil;
-import net.mika.cloudsystem.connection.NettyClientConnection;
+import net.mika.cloudsystem.Main;
 
 public class AdminKeyHandler {
 
@@ -10,7 +8,8 @@ public class AdminKeyHandler {
 
     public static String getAdminKey() throws InterruptedException {
         if(adminKey == null){
-            NettyClientConnection.getChannelFuture().channel().writeAndFlush(Unpooled.copiedBuffer("getAdminKey", CharsetUtil.UTF_8));
+            //NettyClientConnection.getChannelFuture().channel().writeAndFlush(Unpooled.copiedBuffer("getAdminKey 1", CharsetUtil.UTF_8));
+            Main.getConnectionManager().wakeTSUpAndRenewTheAdminKey();
             Thread.sleep(1000);
         }
         return adminKey;

@@ -9,6 +9,12 @@ import net.mika.cloudsystem.ts3bot.Main;
 
 public class ServerHandler extends ChannelInboundHandlerAdapter {
 
+
+    @Override
+    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        System.out.println(ctx + "connectec");
+    }
+
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         ByteBuf byteBuf = (ByteBuf) msg;
@@ -20,7 +26,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
         String message = stringBuilder.toString();
 
         if(message.startsWith("getAdminKey")){
-            String number = message.split("")[1];
+            String number = message.split("")[12];
             ctx.writeAndFlush(Unpooled.copiedBuffer("key: " + Main.getTeamSpeakManager().getAdminKey(Integer.parseInt(number)), CharsetUtil.UTF_8));
         }else if(message.equalsIgnoreCase("startBot")){
             Main.getTeamSpeakManager().connect();

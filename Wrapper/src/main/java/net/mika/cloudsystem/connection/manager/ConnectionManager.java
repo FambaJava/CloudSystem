@@ -10,6 +10,8 @@ public class ConnectionManager {
 
     private Map<ConnectionType, Map<String, Integer>> conDatas = new HashMap<>();
 
+    private NettyClientConnection netty;
+
     public void init(){
         Map<String, Integer> inner = new HashMap<>();
         inner.put("localhost", 5013);
@@ -24,15 +26,19 @@ public class ConnectionManager {
         return "localhost";
     }
 
-    public boolean connect(ConnectionType connectionType, String host){
+    public void connect(ConnectionType connectionType, String host){
         try {
             int port = conDatas.get(connectionType).get(host);
 
-            NettyClientConnection netty = new NettyClientConnection(getHost(), port);
-            return true;
+            netty = new NettyClientConnection(getHost(), port);
+            netty.connect();
         }catch (Exception ex){
-            return false;
+            ex.printStackTrace();
         }
+    }
+
+    public void wakeTSUpAndRenewTheAdminKey(){
+        netty.wakeTSUpAndRenewTheAdminKey();
     }
 
 

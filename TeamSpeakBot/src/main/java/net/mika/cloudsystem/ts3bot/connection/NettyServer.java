@@ -43,7 +43,7 @@ public class NettyServer {
 
             ChannelFuture channelFuture = bootstrap.bind(port).sync();
             //TODO make smtnk
-
+            System.out.println("Server started");
             channelFuture.channel().closeFuture().sync();
         }finally {
             bossGroup.shutdownGracefully();

@@ -44,7 +44,7 @@ public class CommandManager {
 
     public void start(){
         running = true;
-        new Thread(()->{
+        thread = new Thread(()->{
                     while (running){
                         try {
                             line = reader.readLine();
@@ -56,6 +56,11 @@ public class CommandManager {
                         }
                     }
 
-                }, "commandTool").start();
+                }, "commandTool");
+        thread.start();
+    }
+
+    public void stop(){
+        thread.stop();
     }
 }

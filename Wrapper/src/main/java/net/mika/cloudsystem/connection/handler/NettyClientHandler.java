@@ -4,12 +4,13 @@ package net.mika.cloudsystem.connection.handler;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import net.mika.cloudsystem.datas.AdminKeyHandler;
 
 public class NettyClientHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-
+        System.out.println("Connected to server.");
     }
 
     @Override
@@ -23,6 +24,8 @@ public class NettyClientHandler extends ChannelInboundHandlerAdapter {
         String message = stringBuilder.toString();
         if(message.startsWith("key:")){
             String key = message.split("")[1];
+            System.out.println(key);
+            AdminKeyHandler.setAdminKey(key);
         }
     }
 
