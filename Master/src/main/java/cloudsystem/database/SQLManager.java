@@ -2,10 +2,7 @@ package cloudsystem.database;
 
 import cloudsystem.model.TeamSpeakServer;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 
 public class SQLManager {
@@ -47,15 +44,10 @@ public class SQLManager {
 
     public TeamSpeakServer getTeamSpeakServer(int id) throws SQLException {
         Statement statement = connection.createStatement();
-        String name = "SELECT Name FROM SERVER;";
-        statement.executeUpdate(name);
-        String ipAdress = "SELECT IpAdress FROM SERVER";
-        statement.executeUpdate(ipAdress);
-        String port = "SELECT Port FROM SERVER";
-        statement.executeUpdate(port);
-        String password = "SELECT Password FROM SERVER";
-        statement.executeUpdate(password);
-        return new TeamSpeakServer(name, id, ipAdress, Integer.parseInt(port), password);
+        ResultSet rs;
+        String sql = "SELECT * FROM SERVER WHERE Id = " + id + ";";
+        rs = statement.executeQuery(sql);
+        return new TeamSpeakServer(rs.getString("Name"), id, rs.getString("IpAdress"), rs.getInt("Port"), rs.getString("Password"));
     }
 
 
