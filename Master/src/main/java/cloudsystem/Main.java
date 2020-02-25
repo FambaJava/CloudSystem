@@ -14,13 +14,13 @@ public class Main {
 
     private static SQLManager sqlManager;
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) {
 
         sqlManager = new SQLManager();
 
         connectionManager = new ConnectionManager();
 
-        sqlManager.openConnection();
+        getSqlManager().openConnection();
 
         getSqlManager().setUpTeamSpeak("test1", 1, "235.31.53.2", 2004, "asufb");
         getSqlManager().setUpTeamSpeak("test2", 2, "45.2.6.12", 2511, "alskjfjaoisf4");

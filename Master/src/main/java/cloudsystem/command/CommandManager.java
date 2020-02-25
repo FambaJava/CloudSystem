@@ -2,6 +2,7 @@ package cloudsystem.command;
 
 
 import cloudsystem.command.commands.ServerCommand;
+import cloudsystem.command.commands.StopCommand;
 import cloudsystem.command.commands.TestCommand;
 import cloudsystem.command.listener.Command;
 
@@ -69,6 +70,7 @@ public class CommandManager {
         registerCommand("test", new TestCommand());
         registerCommand("las", new ServerCommand());
         registerCommand("listallserver", new ServerCommand());
+        registerCommand("stop", new StopCommand());
     }
 
     public void stop() {

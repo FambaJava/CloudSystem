@@ -10,7 +10,7 @@ import java.util.List;
 public class ServerCommand implements Command {
     
     @Override
-    public void execute(String[] args) throws SQLException {
+    public void execute(String[] args){
         if (args.length == 2) {
             if (args[1].equalsIgnoreCase("TeamSpeak") || args[1].equalsIgnoreCase("ts")) {
                 listAllTeamSpeakServers();
@@ -25,11 +25,15 @@ public class ServerCommand implements Command {
     }
 
 
-    private void listAllTeamSpeakServers() throws SQLException {
+    private void listAllTeamSpeakServers() {
         System.out.println("All TeamSpeak server...");
         System.out.println();
-        List.of(Main.getSqlManager().getTeamSpeakServer(1), Main.getSqlManager().getTeamSpeakServer(2))
-                .forEach(teamSpeakServer -> System.out.println(teamSpeakServer.getFullInfo()));
+        try {
+            List.of(Main.getSqlManager().getTeamSpeakServer(1), Main.getSqlManager().getTeamSpeakServer(2))
+                    .forEach(teamSpeakServer -> System.out.println(teamSpeakServer.getFullInfo()));
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
     }
 
 }
