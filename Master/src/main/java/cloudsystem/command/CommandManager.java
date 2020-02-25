@@ -23,54 +23,55 @@ public class CommandManager {
 
     private String line;
 
-    private boolean registerCommand(String name, Command commandClazz){
+    private boolean registerCommand(String name, Command commandClazz) {
         try {
             commands.put(name, commandClazz);
             return true;
-        }catch (Exception ex){
+        } catch (Exception ex) {
             return false;
         }
     }
 
-    private Command getCommand(String name){
+    private Command getCommand(String name) {
         return commands.get(name);
     }
 
-    private boolean executeCommand(String[] args){
+    private boolean executeCommand(String[] args) {
         try {
             getCommand(args[0]).execute(args);
             return true;
-        }catch (Exception ex){
+        } catch (Exception ex) {
             return false;
         }
     }
 
-    public void start(){
+    public void start() {
         registerCommands();
         running = true;
-        thread = new Thread(()->{
-                    while (running){
-                        try {
-                            line = reader.readLine();
-                            if(!executeCommand(line.split(" ")))
-                                System.out.println("Das Kommando existiert nicht!");
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                            return;
-                        }
-                    }
+        thread = new Thread(() -> {
+            while (running) {
+                try {
+                    line = reader.readLine();
+                    if (!executeCommand(line.split(" ")))
+                        System.out.println("Das Kommando existiert nicht!");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return;
+                }
+            }
 
-                }, "commandTool");
+        }, "commandTool");
         thread.start();
     }
 
 
-    private void registerCommands(){
+    private void registerCommands() {
         registerCommand("test", new TestCommand());
-        registerCommand("server", new ServerCommand());
+        registerCommand("las", new ServerCommand());
+        registerCommand("listallserver", new ServerCommand());
     }
 
-    public void stop(){
+    public void stop() {
         thread.stop();
     }
 }

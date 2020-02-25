@@ -1,4 +1,4 @@
-package net.mika.cloudsystem.ts3bot.connection;
+package net.mika.cloudsystem.teamspeak.connection;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -11,7 +11,7 @@ import io.netty.channel.epoll.EpollServerSocketChannel;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import net.mika.cloudsystem.ts3bot.connection.handler.ServerHandler;
+import net.mika.cloudsystem.teamspeak.connection.handler.ServerHandler;
 
 public class NettyServer {
 
@@ -38,14 +38,14 @@ public class NettyServer {
                             socketChannel.pipeline().addLast(new ServerHandler());
                         }
                     })
-                    .option(ChannelOption.SO_BACKLOG, 128)
+                    .option(ChannelOption.SO_BACKLOG, 120)
                     .childOption(ChannelOption.SO_KEEPALIVE, true);
 
             ChannelFuture channelFuture = bootstrap.bind(port).sync();
             //TODO make smtnk
             System.out.println("Server started");
             channelFuture.channel().closeFuture().sync();
-        }finally {
+        } finally {
             bossGroup.shutdownGracefully();
             workerGroup.shutdownGracefully();
         }

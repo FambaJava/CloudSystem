@@ -1,4 +1,4 @@
-package net.mika.cloudsystem.ts3bot.manager;
+package net.mika.cloudsystem.teamspeak.manager;
 
 import com.github.theholywaffle.teamspeak3.TS3Api;
 import com.github.theholywaffle.teamspeak3.TS3Config;
@@ -22,8 +22,8 @@ public class TeamspeakManager {
         this.port = port;
     }
 
-    public void connect(){
-        thread = new Thread(()->{
+    public void connect() {
+        thread = new Thread(() -> {
             config.setHost(host);
             config.setQueryPort(port);
             config.setDebugLevel(Level.ALL);
@@ -31,7 +31,7 @@ public class TeamspeakManager {
         thread.start();
     }
 
-    public String getAdminKey(int i){
+    public String getAdminKey(int i) {
         return api.getPrivilegeKeys().get(i).getToken();
     }
 

@@ -3,42 +3,30 @@ package cloudsystem.connection.manager;
 
 import cloudsystem.connection.NettyClientConnection;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class ConnectionManager {
 
 
-    private Map<ConnectionType, Map<String, Integer>> conDatas = new HashMap<>();
 
     private NettyClientConnection netty;
+    private ServerConnections serverConnections;
 
-    public void init(){
-        Map<String, Integer> inner = new HashMap<>();
-        inner.put("localhost", 5013);
-        conDatas.put(ConnectionType.TeamSpeak, inner);
-
-        Map<String, Integer> innerMap = new HashMap<>();
-        inner.put("localhost", 5003);
-        conDatas.put(ConnectionType.Master, innerMap);
-    }
-
-    public String getHost(){
+    public String getHost() {
         return "localhost";
     }
 
-    public void connect(ConnectionType connectionType, String host){
+    public void connect(ConnectionType connectionType, String host) {
+        serverConnections = new ServerConnections();
         try {
-            int port = conDatas.get(connectionType).get(host);
+            int port = serverConnections.getWrapper().getPort();
 
-            netty = new NettyClientConnection(getHost(), port);
+            netty = new NettyClientConnection(getHost(), 5004);
             netty.connect();
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
 
-    public void wakeTSUpAndRenewTheAdminKey(){
+    public void wakeTSUpAndRenewTheAdminKey() {
         netty.wakeTSUpAndRenewTheAdminKey();
     }
 

@@ -1,4 +1,4 @@
-package cloudsystem.model;
+package net.mika.cloudsystem.wrapper.server;
 
 public class TeamSpeakServer {
 
@@ -18,16 +18,5 @@ public class TeamSpeakServer {
 
     public String getFullInfo() {
         return name + " - " + id + " | " + ipAddress + ":" + port + " | " + password;
-    }
-
-    @Override
-    public String toString() {
-        return "TeamSpeakServer{" +
-                "name='" + name + '\'' +
-                ", id=" + id +
-                ", ipAddress='" + ipAddress + '\'' +
-                ", port=" + port +
-                ", password='" + password + '\'' +
-                '}';
     }
 }

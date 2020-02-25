@@ -1,18 +1,18 @@
-package net.mika.cloudsystem.ts3bot.connection.handler;
+package net.mika.cloudsystem.teamspeak.connection.handler;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.util.CharsetUtil;
-import net.mika.cloudsystem.ts3bot.Main;
+import net.mika.cloudsystem.teamspeak.Main;
 
 public class ServerHandler extends ChannelInboundHandlerAdapter {
 
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) {
-        System.out.println(ctx + "connectec");
+        System.out.println(ctx + "connected");
     }
 
     @Override

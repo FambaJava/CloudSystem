@@ -8,8 +8,7 @@ public class AdminKeyHandler {
     private static String adminKey;
 
     public static String getAdminKey() throws InterruptedException {
-        if(adminKey == null){
-            //NettyClientConnection.getChannelFuture().channel().writeAndFlush(Unpooled.copiedBuffer("getAdminKey 1", CharsetUtil.UTF_8));
+        if (adminKey == null) {
             Main.getConnectionManager().wakeTSUpAndRenewTheAdminKey();
             Thread.sleep(1000);
         }
