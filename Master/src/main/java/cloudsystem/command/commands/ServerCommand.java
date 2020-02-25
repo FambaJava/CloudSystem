@@ -1,15 +1,16 @@
 package cloudsystem.command.commands;
 
 
+import cloudsystem.Main;
 import cloudsystem.command.listener.Command;
-import cloudsystem.model.TeamSpeakServer;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class ServerCommand implements Command {
     
     @Override
-    public void execute(String[] args) {
+    public void execute(String[] args) throws SQLException {
         if (args.length == 2) {
             if (args[1].equalsIgnoreCase("TeamSpeak") || args[1].equalsIgnoreCase("ts")) {
                 listAllTeamSpeakServers();
@@ -24,10 +25,10 @@ public class ServerCommand implements Command {
     }
 
 
-    private void listAllTeamSpeakServers() {
+    private void listAllTeamSpeakServers() throws SQLException {
         System.out.println("All TeamSpeak server...");
         System.out.println();
-        List.of(new TeamSpeakServer("test", 1, "24.235.23.1", 5001, "safh24mfsdij"))
+        List.of(Main.getSqlManager().getTeamSpeakServer(1), Main.getSqlManager().getTeamSpeakServer(2))
                 .forEach(teamSpeakServer -> System.out.println(teamSpeakServer.getFullInfo()));
     }
 
