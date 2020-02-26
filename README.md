@@ -4,7 +4,7 @@ This CloudSystem is based on a Wrapper and Master, which workes with our TeamSpe
 
 ## Installation
 
-You can [download](https://pip.pypa.io/en/stable/) the CloudSystem [here](https://pip.pypa.io/en/stable/).
+You can [download](https://github.com/FambaJava/CloudSystem) the CloudSystem [here](https://github.com/FambaJava/CloudSystem).
 
 
 ```bash
@@ -18,12 +18,26 @@ las | listallservers
 ```
 All TeamSpeak server...
 
-test1 - 1 | 235.31.53.2:2004 | asufb
-test2 - 2 | 45.2.6.12:2511 | alskjfjaoisf4
+NAME - ID | IP-Adress:Port | Password
+
+test1 - 1 | 127.0.0.1:2004 | asufb
+test2 - 2 | 127.0.0.1:2511 | alskjfjaoisf4
+
+All Minecraft server...
+
+NAME - ID | IP-Adress:Port | ServerType
+
+test1 - 1 | 127.0.0.1:2004 | STATIC
+test2 - 2 | 127.0.0.1:2511 | DYNAMIC
 ```
 
-## SOON
-SOON....
+## IMPORTANT Software
+### You have to and install H2 DataBase     
+
+#### Windows:                          [download](https://h2database.com/h2-setup-2019-10-14.exe)
+#### MacOS:                              [install directly](http://macappstore.org/h2/)
+#### Linux (All OS can use that):        [Platform Indipendet](http://macappstore.org/h2/)
+
 
 ## License
 You could only read and use it.
