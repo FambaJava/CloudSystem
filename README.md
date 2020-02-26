@@ -22,8 +22,13 @@ test1 - 1 | 127.0.0.1:2004 | asufb
 test2 - 2 | 127.0.0.1:2511 | alskjfjaoisf4
 ```
 
-## SOON
-SOON....
+## IMPORTANT Software
+### You have to and install H2 DataBase     
+
+#### Windows:                          [download](https://h2database.com/h2-setup-2019-10-14.exe)
+#### MacOS:                              [install directly](http://macappstore.org/h2/)
+#### Linux (All OS can use that):        [Platform Indipendet](http://macappstore.org/h2/)
+
 
 ## License
 You could only read and use it.
