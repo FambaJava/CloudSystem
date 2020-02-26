@@ -4,7 +4,7 @@ This CloudSystem is based on a Wrapper and Master, which workes with our TeamSpe
 
 ## Installation
 
-You can [download](https://pip.pypa.io/en/stable/) the CloudSystem [here](https://pip.pypa.io/en/stable/).
+You can [download](https://github.com/FambaJava/CloudSystem) the CloudSystem [here](https://github.com/FambaJava/CloudSystem).
 
 
 ```bash
