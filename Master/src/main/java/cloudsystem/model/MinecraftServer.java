@@ -25,15 +25,15 @@ public class MinecraftServer {
         return super.toString();
     }
 
-    public void start(){
+    public void start() {
 
     }
 
-    public void stop(){
+    public void stop() {
 
     }
 
-    public boolean isRunning(){
+    public boolean isRunning() {
         return false;
     }
 }

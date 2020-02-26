@@ -10,7 +10,7 @@ import java.net.URL;
 public class FileDownloader {
 
     public void downloadFile(String fileUrl, File path) throws IOException {
-        if(!path.exists())
+        if (!path.exists())
             path.createNewFile();
         int BUFFER_SIZE = 4096;
         URL url = new URL(fileUrl);

@@ -20,8 +20,7 @@ public class SQLManager {
         this.password = "";
     }
 
-    @lombok.SneakyThrows
-    public void openConnection() {
+    public void openConnection() throws SQLException, ClassNotFoundException {
         Class.forName("org.h2.Driver");
         System.out.println("Connecting to DB...");
         connection = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/test", user, password);
@@ -39,7 +38,7 @@ public class SQLManager {
     }
 
     public boolean setUpTeamSpeak(String name, int id, String ipAdress, int port, String password) throws SQLException {
-        if(!idExists(id)){
+        if (!idExists(id)) {
             System.out.println("SetUp new teamspeak.");
             Statement tableStatement = connection.createStatement();
             String sql = "INSERT INTO ONLINE_SERVERS (TYPE, NAME, ID, ADRESS, PORT, PASSWORD)\n" +
@@ -52,7 +51,7 @@ public class SQLManager {
     }
 
     public boolean setUpMinecraft(String name, int id, String ipAdress, int port, String type) throws SQLException {
-        if(!idExists(id)){
+        if (!idExists(id)) {
             System.out.println("SetUp new minecraft server.");
             Statement tableStatement = connection.createStatement();
             String sql = "INSERT INTO ONLINE_SERVERS (TYPE, NAME, ID, ADRESS, PORT, PASSWORD)\n" +
@@ -70,21 +69,21 @@ public class SQLManager {
             String sql = "SELECT * FROM ONLINE_SERVERS WHERE ID = " + id + ";";
             ResultSet rs = statement.executeQuery(sql);
             return rs.next();
-        }catch (JdbcSQLException ex){
+        } catch (JdbcSQLException ex) {
             return false;
         }
     }
 
     public TeamSpeakServer getTeamSpeakServer(int id) throws SQLException {
         Statement statement = connection.createStatement();
-        ResultSet rs ;
+        ResultSet rs;
         String sql = "SELECT * FROM ONLINE_SERVERS WHERE (ID = " + id + ") AND (TYPE = 'TeamSpeak');";
         rs = statement.executeQuery(sql);
         String name = null;
         String ipAdress = null;
         int port = 0;
         String password = null;
-        while (rs.next()){
+        while (rs.next()) {
             name = rs.getString("NAME");
             ipAdress = rs.getString("ADRESS");
             port = rs.getInt("PORT");
@@ -95,14 +94,14 @@ public class SQLManager {
 
     public MinecraftServer getMinecraftServer(int id) throws SQLException {
         Statement statement = connection.createStatement();
-        ResultSet rs ;
+        ResultSet rs;
         String sql = "SELECT * FROM ONLINE_SERVERS WHERE (ID = " + id + ") AND (TYPE = 'Minecraft');";
         rs = statement.executeQuery(sql);
         String name = null;
         String ipAdress = null;
         int port = 0;
         String type = null;
-        while (rs.next()){
+        while (rs.next()) {
             name = rs.getString("NAME");
             ipAdress = rs.getString("ADRESS");
             port = rs.getInt("PORT");
@@ -115,16 +114,16 @@ public class SQLManager {
         List<TeamSpeakServer> servers = new ArrayList<>();
 
         Statement statement = connection.createStatement();
-        ResultSet rs ;
+        ResultSet rs;
         String sql = "SELECT * FROM ONLINE_SERVERS WHERE  (TYPE = 'TeamSpeak');";
         rs = statement.executeQuery(sql);
-        while (rs.next()){
+        while (rs.next()) {
             String name = rs.getString("NAME");
             int id = rs.getInt("ID");
             String ipAdress = rs.getString("ADRESS");
             int port = rs.getInt("PORT");
             password = rs.getString("PASSWORD");
-            servers.add( new TeamSpeakServer(name, id, ipAdress, port, password));
+            servers.add(new TeamSpeakServer(name, id, ipAdress, port, password));
         }
         return servers;
     }

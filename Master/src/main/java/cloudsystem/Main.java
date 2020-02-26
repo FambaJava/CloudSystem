@@ -40,6 +40,7 @@ public class Main {
         getSqlManager().setUpTeamSpeak("test2", 2, "45.2.6.12", 2511, "alskjfjaoisf4");
         getSqlManager().setUpTeamSpeak("test3", 3, "33.34.63.21", 2621, "sdfsdgf3");
 
+
         connectionManager.connect(ConnectionType.Master, connectionManager.getHost());
 
     }

@@ -26,7 +26,7 @@ public class NettyClientConnection {
         this.commandManager = new CommandManager();
     }
 
-    public void connect() throws InterruptedException {
+    public void connect()  {
         EventLoopGroup workerGroup = new NioEventLoopGroup();
 
         try {
@@ -46,6 +46,12 @@ public class NettyClientConnection {
             System.out.println("Client started");
             channelFuture.channel().closeFuture().sync();
 
+        } catch (Exception ex) {
+            System.out.println("Wrapper is offline.");
+            System.out.println();
+            System.out.println("You can now use commands...");
+            System.out.println();
+            commandManager.start();
         } finally {
             workerGroup.shutdownGracefully();
         }

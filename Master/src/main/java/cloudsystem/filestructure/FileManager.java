@@ -28,18 +28,18 @@ public class FileManager {
         files.add(wrapperConfig);
     }
 
-    public void createFilesIfNotExists(){
+    public void createFilesIfNotExists() {
         System.out.println("FileSystem in loading...");
         System.out.println("Files to load: " + files.size());
         try {
-            files.forEach(file ->{
-                if(!file.exists()){
+            files.forEach(file -> {
+                if (!file.exists()) {
                     System.out.println("File is creating...");
                     file.mkdirs();
                     System.out.println("File " + file.getName() + " is created.");
                 }
             });
-        }catch (NullPointerException ex){
+        } catch (NullPointerException ex) {
             System.out.println("There is a file which is loaded with errors! Reason: " + ex.getMessage());
         }
 

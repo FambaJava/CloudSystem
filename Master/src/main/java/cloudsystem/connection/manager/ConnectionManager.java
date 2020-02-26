@@ -15,14 +15,10 @@ public class ConnectionManager {
 
     public void connect(ConnectionType connectionType, String host) {
         serverConnections = new ServerConnections();
-        try {
-            int port = serverConnections.getWrapper().getPort();
+        int port = serverConnections.getWrapper().getPort();
 
-            netty = new NettyClientConnection(getHost(), 5004);
-            netty.connect();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        netty = new NettyClientConnection(getHost(), 5004);
+        netty.connect();
     }
 
     public void wakeTSUpAndRenewTheAdminKey() {
