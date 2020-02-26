@@ -36,9 +36,9 @@ public class Main {
 
         getSqlManager().openConnection();
 
-        getSqlManager().setUpTeamSpeak("test1", 1, "235.31.53.2", 2004, "asufb");
-        getSqlManager().setUpTeamSpeak("test2", 2, "45.2.6.12", 2511, "alskjfjaoisf4");
-        getSqlManager().setUpTeamSpeak("test3", 3, "33.34.63.21", 2621, "sdfsdgf3");
+        getSqlManager().setUpTeamSpeak("test1", "235.31.53.2", 2004, "asufb");
+        getSqlManager().setUpTeamSpeak("test2", "45.2.6.12", 2511, "alskjfjaoisf4");
+        getSqlManager().setUpTeamSpeak("test3", "33.34.63.21", 2621, "sdfsdgf3");
 
 
         connectionManager.connect(ConnectionType.Master, connectionManager.getHost());

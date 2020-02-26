@@ -2,7 +2,6 @@ package cloudsystem.database;
 
 import cloudsystem.model.MinecraftServer;
 import cloudsystem.model.TeamSpeakServer;
-import org.h2.jdbc.JdbcSQLException;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -26,52 +25,37 @@ public class SQLManager {
         connection = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/test", user, password);
         System.out.println("Connected");
         Statement tableStatement = connection.createStatement();
-        String sql = "CREATE TABLE IF NOT EXISTS `ONLINE_SERVERS`\n" +
-                "(`TYPE` VARCHAR(100),\n" +
-                "`NAME` VARCHAR(100), \n" +
-                "`ID` INTEGER(100),\n" +
-                "`ADRESS` VARCHAR(100), \n" +
-                "`PORT` INTEGER(100), \n" +
-                "`PASSWORD` VARCHAR(100))";
+        String sql = "drop table if exists ONLINE_SERVERS; create table ONLINE_SERVERS\n" +
+                "(\n" +
+                "    TYPE     VARCHAR(100),\n" +
+                "    NAME     VARCHAR(100),\n" +
+                "    ID       INTEGER auto_increment,\n" +
+                "    ADDRESS  VARCHAR(100),\n" +
+                "    PORT     INTEGER,\n" +
+                "    PASSWORD VARCHAR(100),\n" +
+                "primary key (ID)\n" +
+                ");";
         tableStatement.executeUpdate(sql);
         System.out.println("Created tables");
     }
 
-    public boolean setUpTeamSpeak(String name, int id, String ipAdress, int port, String password) throws SQLException {
-        if (!idExists(id)) {
-            System.out.println("SetUp new teamspeak.");
-            Statement tableStatement = connection.createStatement();
-            String sql = "INSERT INTO ONLINE_SERVERS (TYPE, NAME, ID, ADRESS, PORT, PASSWORD)\n" +
-                    "VALUES ('TeamSpeak', '" + name + "', " + id + ", '" + ipAdress + "', " + port + "  , '" + password + "')";
-            tableStatement.executeUpdate(sql);
-            System.out.println("setup finished");
-            return true;
-        }
-        return false;
+    public void setUpTeamSpeak(String name, String ipAddress, int port, String password) throws SQLException {
+        System.out.println("SetUp new teamspeak.");
+        Statement tableStatement = connection.createStatement();
+        String sql = "INSERT INTO ONLINE_SERVERS (TYPE, NAME, ADDRESS, PORT, PASSWORD)\n" +
+                "VALUES ('TeamSpeak', '" + name + "', '" + ipAddress + "', " + port + "  , '" + password + "')";
+        tableStatement.executeUpdate(sql);
+        System.out.println("setup finished");
     }
 
-    public boolean setUpMinecraft(String name, int id, String ipAdress, int port, String type) throws SQLException {
-        if (!idExists(id)) {
-            System.out.println("SetUp new minecraft server.");
-            Statement tableStatement = connection.createStatement();
-            String sql = "INSERT INTO ONLINE_SERVERS (TYPE, NAME, ID, ADRESS, PORT, PASSWORD)\n" +
-                    "VALUES ('Minecraft', '" + name + "', " + id + ", '" + ipAdress + "', " + port + "  , '" + type + "')";
-            tableStatement.executeUpdate(sql);
-            System.out.println("setup finished");
-            return true;
-        }
-        return false;
-    }
-
-    private boolean idExists(int id) throws SQLException {
-        try {
-            Statement statement = connection.createStatement();
-            String sql = "SELECT * FROM ONLINE_SERVERS WHERE ID = " + id + ";";
-            ResultSet rs = statement.executeQuery(sql);
-            return rs.next();
-        } catch (JdbcSQLException ex) {
-            return false;
-        }
+    public boolean setUpMinecraft(String name, String ipAddress, int port, String type) throws SQLException {
+        System.out.println("SetUp new minecraft server.");
+        Statement tableStatement = connection.createStatement();
+        String sql = "INSERT INTO ONLINE_SERVERS (TYPE, NAME, ADDRESS, PORT, PASSWORD)\n" +
+                "VALUES ('Minecraft', '" + name + "', '" + ipAddress + "', " + port + "  , '" + type + "')";
+        tableStatement.executeUpdate(sql);
+        System.out.println("setup finished");
+        return true;
     }
 
     public TeamSpeakServer getTeamSpeakServer(int id) throws SQLException {
@@ -80,16 +64,16 @@ public class SQLManager {
         String sql = "SELECT * FROM ONLINE_SERVERS WHERE (ID = " + id + ") AND (TYPE = 'TeamSpeak');";
         rs = statement.executeQuery(sql);
         String name = null;
-        String ipAdress = null;
+        String ipAddress = null;
         int port = 0;
         String password = null;
         while (rs.next()) {
             name = rs.getString("NAME");
-            ipAdress = rs.getString("ADRESS");
+            ipAddress = rs.getString("ADDRESS");
             port = rs.getInt("PORT");
             password = rs.getString("PASSWORD");
         }
-        return new TeamSpeakServer(name, id, ipAdress, port, password);
+        return new TeamSpeakServer(name, id, ipAddress, port, password);
     }
 
     public MinecraftServer getMinecraftServer(int id) throws SQLException {
@@ -98,16 +82,16 @@ public class SQLManager {
         String sql = "SELECT * FROM ONLINE_SERVERS WHERE (ID = " + id + ") AND (TYPE = 'Minecraft');";
         rs = statement.executeQuery(sql);
         String name = null;
-        String ipAdress = null;
+        String ipAddress = null;
         int port = 0;
         String type = null;
         while (rs.next()) {
             name = rs.getString("NAME");
-            ipAdress = rs.getString("ADRESS");
+            ipAddress = rs.getString("ADDRESS");
             port = rs.getInt("PORT");
             type = rs.getString("PASSWORD");
         }
-        return new MinecraftServer(name, id, ipAdress, port, type);
+        return new MinecraftServer(name, id, ipAddress, port, type);
     }
 
     public List<TeamSpeakServer> getAllTeamSpeakServers() throws SQLException {
@@ -120,10 +104,10 @@ public class SQLManager {
         while (rs.next()) {
             String name = rs.getString("NAME");
             int id = rs.getInt("ID");
-            String ipAdress = rs.getString("ADRESS");
+            String ipAddress = rs.getString("ADDRESS");
             int port = rs.getInt("PORT");
             password = rs.getString("PASSWORD");
-            servers.add(new TeamSpeakServer(name, id, ipAdress, port, password));
+            servers.add(new TeamSpeakServer(name, id, ipAddress, port, password));
         }
         return servers;
     }
