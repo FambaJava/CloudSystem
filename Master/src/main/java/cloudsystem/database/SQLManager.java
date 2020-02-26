@@ -1,6 +1,7 @@
 package cloudsystem.database;
 
 import cloudsystem.model.TeamSpeakServer;
+import org.h2.jdbc.JdbcSQLException;
 
 import java.sql.*;
 
@@ -34,8 +35,8 @@ public class SQLManager {
         System.out.println("Created table");
     }
 
-    public boolean setUpTeamSpeak(String name, int id, String ipAdress, int port, String password) {
-        try {
+    public boolean setUpTeamSpeak(String name, int id, String ipAdress, int port, String password) throws SQLException {
+        if(!idExists(id)){
             System.out.println("SetUp new teamspeak.");
             Statement tableStatement = connection.createStatement();
             String sql = "INSERT INTO ONLINE_SERVERS (TYPE, NAME, ID, ADRESS, PORT, PASSWORD)\n" +
@@ -43,18 +44,25 @@ public class SQLManager {
             tableStatement.executeUpdate(sql);
             System.out.println("setup finished");
             return true;
-        } catch (Exception ex) {
-            System.out.println("setup finished with errors: " + ex.getMessage());
+        }
+        return false;
+    }
+
+    private boolean idExists(int id) throws SQLException {
+        try {
+            Statement statement = connection.createStatement();
+            String sql = "SELECT * FROM ONLINE_SERVERS WHERE ID = " + id + ";";
+            ResultSet rs = statement.executeQuery(sql);
+            return rs.next();
+        }catch (JdbcSQLException ex){
             return false;
         }
     }
 
     public TeamSpeakServer getTeamSpeakServer(int id) throws SQLException {
-        System.out.println("create statement");
         Statement statement = connection.createStatement();
         ResultSet rs ;
-        String sql = "SELECT * FROM ONLINE_SERVERS WHERE ID = " + id + ";";
-        System.out.println("execute query");
+        String sql = "SELECT * FROM ONLINE_SERVERS WHERE (ID = " + id + ") AND (TYPE = 'TeamSpeak');";
         rs = statement.executeQuery(sql);
         String name = null;
         String ipAdress = null;
@@ -66,7 +74,6 @@ public class SQLManager {
             port = rs.getInt("PORT");
             password = rs.getString("PASSWORD");
         }
-        System.out.println(name);
         return new TeamSpeakServer(name, id, ipAdress, port, password);
     }
 

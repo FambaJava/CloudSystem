@@ -14,7 +14,7 @@ public class Main {
 
     private static SQLManager sqlManager;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
 
         sqlManager = new SQLManager();
 
