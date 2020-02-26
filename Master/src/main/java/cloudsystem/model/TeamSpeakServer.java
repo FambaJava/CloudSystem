@@ -30,4 +30,17 @@ public class TeamSpeakServer {
                 ", password='" + password + '\'' +
                 '}';
     }
+
+
+    public boolean isServerOnline() {
+        return false;
+    }
+
+    public void start() {
+
+    }
+
+    public void stop() {
+
+    }
 }

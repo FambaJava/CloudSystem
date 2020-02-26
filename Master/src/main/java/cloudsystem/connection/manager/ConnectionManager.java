@@ -6,7 +6,6 @@ import cloudsystem.connection.NettyClientConnection;
 public class ConnectionManager {
 
 
-
     private NettyClientConnection netty;
     private ServerConnections serverConnections;
 

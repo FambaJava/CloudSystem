@@ -4,5 +4,5 @@ import java.sql.SQLException;
 
 public interface Command {
 
-    void execute(String[] args) throws InterruptedException, SQLException;
+    void execute(String[] args) throws InterruptedException, SQLException, ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException;
 }

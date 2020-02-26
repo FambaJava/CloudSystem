@@ -1,7 +1,7 @@
 package cloudsystem.command;
 
 
-import cloudsystem.command.commands.ServerCommand;
+import cloudsystem.command.commands.ServerListCommand;
 import cloudsystem.command.commands.StopCommand;
 import cloudsystem.command.commands.TestCommand;
 import cloudsystem.command.listener.Command;
@@ -9,6 +9,7 @@ import cloudsystem.command.listener.Command;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,24 +25,19 @@ public class CommandManager {
 
     private String line;
 
-    private boolean registerCommand(String name, Command commandClazz) {
-        try {
-            commands.put(name, commandClazz);
-            return true;
-        } catch (Exception ex) {
-            return false;
-        }
+    private void registerCommand(String name, Command commandClazz) {
+        commands.put(name, commandClazz);
     }
 
     private Command getCommand(String name) {
         return commands.get(name);
     }
 
-    private boolean executeCommand(String[] args) {
+    private boolean executeCommand(String[] args) throws SQLException, InterruptedException {
         try {
             getCommand(args[0]).execute(args);
             return true;
-        } catch (Exception ex) {
+        } catch (NullPointerException | ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException ex) {
             return false;
         }
     }
@@ -55,7 +51,7 @@ public class CommandManager {
                     line = reader.readLine();
                     if (!executeCommand(line.split(" ")))
                         System.out.println("Das Kommando existiert nicht!");
-                } catch (IOException e) {
+                } catch (IOException | SQLException | InterruptedException e) {
                     e.printStackTrace();
                     return;
                 }
@@ -68,8 +64,8 @@ public class CommandManager {
 
     private void registerCommands() {
         registerCommand("test", new TestCommand());
-        registerCommand("las", new ServerCommand());
-        registerCommand("listallserver", new ServerCommand());
+        registerCommand("las", new ServerListCommand());
+        registerCommand("listallserver", new ServerListCommand());
         registerCommand("stop", new StopCommand());
     }
 
