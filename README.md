@@ -18,8 +18,17 @@ las | listallservers
 ```
 All TeamSpeak server...
 
+NAME - ID | IP-Adress:Port | Password
+
 test1 - 1 | 127.0.0.1:2004 | asufb
 test2 - 2 | 127.0.0.1:2511 | alskjfjaoisf4
+
+All Minecraft server...
+
+NAME - ID | IP-Adress:Port | ServerType
+
+test1 - 1 | 127.0.0.1:2004 | STATIC
+test2 - 2 | 127.0.0.1:2511 | DYNAMIC
 ```
 
 ## IMPORTANT Software
