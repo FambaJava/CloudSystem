@@ -18,8 +18,8 @@ las | listallservers
 ```
 All TeamSpeak server...
 
-test1 - 1 | 235.31.53.2:2004 | asufb
-test2 - 2 | 45.2.6.12:2511 | alskjfjaoisf4
+test1 - 1 | 127.0.0.1:2004 | asufb
+test2 - 2 | 127.0.0.1:2511 | alskjfjaoisf4
 ```
 
 ## SOON
