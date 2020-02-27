@@ -1,10 +1,7 @@
 package cloudsystem.command;
 
 
-import cloudsystem.command.commands.RestartCommand;
-import cloudsystem.command.commands.ServerListCommand;
-import cloudsystem.command.commands.StopCommand;
-import cloudsystem.command.commands.TestCommand;
+import cloudsystem.command.commands.*;
 import cloudsystem.command.listener.Command;
 
 import java.io.BufferedReader;
@@ -54,7 +51,7 @@ public class CommandManager {
                 try {
                     line = reader.readLine();
                     if (!executeCommand(line.split(" ")))
-                        System.out.println("Das Kommando existiert nicht!");
+                        System.out.println("This command does not exist!");
                 } catch (IOException | SQLException | InterruptedException e) {
                     e.printStackTrace();
                     return;
@@ -72,9 +69,12 @@ public class CommandManager {
         registerCommand("listallserver", new ServerListCommand());
         registerCommand("stop", new StopCommand());
         registerCommand("restart", new RestartCommand());
+        registerCommand("reload", new RestartCommand());
+        registerCommand("rl", new RestartCommand());
+        registerCommand("server", new ServerCommand());
     }
 
-    private void unRegisterCommands(){
+    private void unRegisterCommands() {
         commands.clear();
     }
 

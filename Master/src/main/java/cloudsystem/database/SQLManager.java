@@ -44,6 +44,7 @@ public class SQLManager {
                 "    ADDRESS  VARCHAR(100),\n" +
                 "    PORT     INTEGER,\n" +
                 "    TYPE VARCHAR(100),\n" +
+                "    MAXRAM INTEGER(100),\n" +
                 "    ONLINE BOOLEAN,\n" +
                 "primary key (ID)\n" +
                 ");";
@@ -60,11 +61,11 @@ public class SQLManager {
         System.out.println("setup finished");
     }
 
-    public void setUpMinecraft(String name, String ipAddress, int port, String type) throws SQLException {
+    public void setUpMinecraft(String name, String ipAddress, int port, String type, int maxRam) throws SQLException {
         System.out.println("SetUp new minecraft server.");
         Statement tableStatement = connection.createStatement();
-        String sql = "INSERT INTO MINECRAFT_SERVERS (NAME, ADDRESS, PORT, TYPE, ONLINE)\n" +
-                "VALUES ('" + name + "', '" + ipAddress + "', " + port + "  , '" + type + "', false)";
+        String sql = "INSERT INTO MINECRAFT_SERVERS (NAME, ADDRESS, PORT, TYPE, MAXRAM, ONLINE)\n" +
+                "VALUES ('" + name + "', '" + ipAddress + "', " + port + "  , '" + type + "', " + maxRam + ", false)";
         tableStatement.executeUpdate(sql);
         System.out.println("setup finished");
     }
@@ -75,13 +76,14 @@ public class SQLManager {
         String sql = "SELECT * FROM MINECRAFT_SERVERS;";
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
-        while (resultSet.next()){
+        while (resultSet.next()) {
             servers.add(new MinecraftServer(
                     resultSet.getString("NAME"),
                     resultSet.getInt("ID"),
                     resultSet.getString("ADDRESS"),
                     resultSet.getInt("PORT"),
                     resultSet.getString("TYPE"),
+                    resultSet.getInt("MAXRAM"),
                     resultSet.getBoolean("ONLINE")
             ));
         }

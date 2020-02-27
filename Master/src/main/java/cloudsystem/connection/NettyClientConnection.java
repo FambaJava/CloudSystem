@@ -46,8 +46,13 @@ public class NettyClientConnection {
                 }
             });
             ChannelFuture channelFuture = bootstrap.connect(host, port).sync();
+            System.out.println("Master connected successfully to the Wrapper!");
+            System.out.println();
             commandManager.start();
-            System.out.println("Client started");
+            System.out.println("You can use now the CommandSystem.");
+            System.out.println();
+            System.out.println("Cloud is successfully started.");
+            System.out.println();
             connected = true;
             channelFuture.channel().closeFuture().sync();
             connected = false;
@@ -67,13 +72,11 @@ public class NettyClientConnection {
         return commandManager;
     }
 
-    public boolean wakeTSUpAndRenewTheAdminKey() {
+    public void wakeTSUpAndRenewTheAdminKey() {
         try {
             channel.writeAndFlush(Unpooled.copiedBuffer("getAdminKey 11", CharsetUtil.UTF_8));
-            return true;
         } catch (Exception ex) {
             ex.printStackTrace();
-            return false;
         }
     }
 

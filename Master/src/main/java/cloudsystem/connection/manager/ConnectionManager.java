@@ -10,7 +10,7 @@ public class ConnectionManager {
 
 
     private NettyClientConnection netty;
-   // private ServerConnections serverConnections;
+    // private ServerConnections serverConnections;
 
     public String getHost() {
         return "localhost";
@@ -20,12 +20,12 @@ public class ConnectionManager {
         //serverConnections = new ServerConnections();
         netty = new NettyClientConnection(getHost(), 5004);
         //int port = serverConnections.getWrapper().getPort();
-        if(isNotConnected()){
+        if (isNotConnected()) {
             netty.connect();
         }
     }
 
-    public CommandManager getCommandManager(){
+    public CommandManager getCommandManager() {
         return netty.getCommandManager();
     }
 
@@ -33,7 +33,7 @@ public class ConnectionManager {
         netty.wakeTSUpAndRenewTheAdminKey();
     }
 
-    private boolean isNotConnected(){
+    private boolean isNotConnected() {
         return !netty.connected;
     }
 

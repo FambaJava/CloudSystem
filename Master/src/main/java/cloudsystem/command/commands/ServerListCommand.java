@@ -27,7 +27,7 @@ public class ServerListCommand implements Command {
 
     private void listAllMinecraftServers() throws SQLException {
         System.out.println();
-        System.out.println("MINECRAFT: NAME - ID | IP-Adress:Port | Type | Online");
+        System.out.println("MINECRAFT: NAME - ID | IP-Adress:Port | Type | maxRam | Online");
         System.out.println();
         Main.getSqlManager().getAllMinecraftServers().forEach(minecraftServer -> {
             System.out.println(minecraftServer.getFullInfo());

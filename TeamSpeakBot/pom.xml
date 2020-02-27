@@ -8,6 +8,10 @@
     <artifactId>TeamSpeakBot</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+    </properties>
 
     <dependencies>
         <dependency>
@@ -20,13 +24,6 @@
             <groupId>com.github.theholywaffle</groupId>
             <artifactId>teamspeak3-api</artifactId>
             <version>1.0.14</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-releasetrain</artifactId>
-            <version>Moore-SR4</version>
-            <scope>import</scope>
-            <type>pom</type>
         </dependency>
     </dependencies>
 

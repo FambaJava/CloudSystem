@@ -44,8 +44,8 @@ public class Main {
         getSqlManager().setUpTeamSpeak("test2", "45.2.6.12", 2511, "alskjfjaoisf4");
         getSqlManager().setUpTeamSpeak("test3", "33.34.63.21", 2621, "sdfsdgf3");
 
-        getSqlManager().setUpMinecraft("Lobby-1", "235.32.52.214", 2356, "STATIC");
-        getSqlManager().setUpMinecraft("Lobby-2", "35.23.62.156", 8326, "DYNAMIC");
+        getSqlManager().setUpMinecraft("Lobby-1", "235.32.52.214", 2356, "STATIC", 1024);
+        getSqlManager().setUpMinecraft("Lobby-2", "35.23.62.156", 8326, "DYNAMIC", 2048);
 
         connectionManager.connect(ConnectionType.Master, connectionManager.getHost());
 
@@ -59,15 +59,15 @@ public class Main {
         return sqlManager;
     }
 
-    public static CloudClassLoader getCloudClassLoader() {
+    private static CloudClassLoader getCloudClassLoader() {
         return cloudClassLoader;
     }
 
     public static void stop() throws SQLException, ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         getCloudClassLoader().stopAllPlugins();
-        try{
+        try {
             getConnectionManager().getCommandManager().stop();
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
         getSqlManager().close();
