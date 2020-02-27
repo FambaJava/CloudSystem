@@ -7,18 +7,17 @@ public class ConnectionManager {
 
 
     private NettyClientConnection netty;
-    private ServerConnections serverConnections;
+   // private ServerConnections serverConnections;
 
     public String getHost() {
         return "localhost";
     }
 
     public void connect(ConnectionType connectionType, String host) {
-        serverConnections = new ServerConnections();
+        //serverConnections = new ServerConnections();
+        netty = new NettyClientConnection(getHost(), 5004);
+        //int port = serverConnections.getWrapper().getPort();
         if(isNotConnected()){
-            int port = serverConnections.getWrapper().getPort();
-
-            netty = new NettyClientConnection(getHost(), 5004);
             netty.connect();
         }
     }
