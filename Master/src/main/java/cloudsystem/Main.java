@@ -7,6 +7,7 @@ import cloudsystem.connection.manager.ConnectionType;
 import cloudsystem.database.SQLManager;
 import cloudsystem.filestructure.FileManager;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 public class Main {
@@ -20,11 +21,11 @@ public class Main {
 
     private static CloudClassLoader cloudClassLoader;
 
-    public static void main(String[] args) throws SQLException, ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    public static void main(String[] args) throws SQLException, ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, IOException {
         start();
     }
 
-    public static void start() throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, SQLException {
+    public static void start() throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, SQLException, IOException {
         sqlManager = new SQLManager();
 
         connectionManager = new ConnectionManager();
@@ -60,5 +61,15 @@ public class Main {
 
     public static CloudClassLoader getCloudClassLoader() {
         return cloudClassLoader;
+    }
+
+    public static void stop() throws SQLException, ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        getCloudClassLoader().stopAllPlugins();
+        try{
+            getConnectionManager().getCommandManager().stop();
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+        getSqlManager().close();
     }
 }

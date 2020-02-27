@@ -1,7 +1,10 @@
 package cloudsystem.connection.manager;
 
 
+import cloudsystem.command.CommandManager;
 import cloudsystem.connection.NettyClientConnection;
+
+import java.io.IOException;
 
 public class ConnectionManager {
 
@@ -13,13 +16,17 @@ public class ConnectionManager {
         return "localhost";
     }
 
-    public void connect(ConnectionType connectionType, String host) {
+    public void connect(ConnectionType connectionType, String host) throws IOException {
         //serverConnections = new ServerConnections();
         netty = new NettyClientConnection(getHost(), 5004);
         //int port = serverConnections.getWrapper().getPort();
         if(isNotConnected()){
             netty.connect();
         }
+    }
+
+    public CommandManager getCommandManager(){
+        return netty.getCommandManager();
     }
 
     public void wakeTSUpAndRenewTheAdminKey() {

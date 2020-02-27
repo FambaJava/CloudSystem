@@ -66,27 +66,5 @@ public class CloudClassLoader {
         }
         System.out.println(plugins.length + " plugins disabled.");
     }
-    /*public CloudClassLoader() throws MalformedURLException {
-        this.classLoader = new URLClassLoader.newInstance(new URL[]{new URL(pluginPath.getAbsolutePath())});
-    }
 
-
-    private void load(String clzzName) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InstantiationException {
-        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        Class<?> cls = classLoader.loadClass(clzzName);
-        Method method = cls.getDeclaredMethod("onEnable");
-        Object instance = cls.newInstance();
-
-    }
-
-    public void loadAllClazzes() throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-        pluginPath = new File("Master/plugins");
-        if (!pluginPath.exists())
-            pluginPath.mkdir();
-
-        File[] plugins = pluginPath.listFiles();
-        for (int i = 0; i < plugins.length; i++) {
-           load(plugins[i].getAbsolutePath());
-        }
-    }*/
 }

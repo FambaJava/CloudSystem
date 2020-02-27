@@ -10,6 +10,8 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.util.CharsetUtil;
 
+import java.io.IOException;
+
 public class NettyClientConnection {
 
     private String host;
@@ -28,7 +30,7 @@ public class NettyClientConnection {
         this.commandManager = new CommandManager();
     }
 
-    public void connect()  {
+    public void connect() throws IOException {
         EventLoopGroup workerGroup = new NioEventLoopGroup();
 
         try {
@@ -57,7 +59,12 @@ public class NettyClientConnection {
             commandManager.start();
         } finally {
             workerGroup.shutdownGracefully();
+
         }
+    }
+
+    public CommandManager getCommandManager() {
+        return commandManager;
     }
 
     public boolean wakeTSUpAndRenewTheAdminKey() {

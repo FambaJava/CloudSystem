@@ -1,6 +1,7 @@
 package cloudsystem.command;
 
 
+import cloudsystem.command.commands.RestartCommand;
 import cloudsystem.command.commands.ServerListCommand;
 import cloudsystem.command.commands.StopCommand;
 import cloudsystem.command.commands.TestCommand;
@@ -15,13 +16,13 @@ import java.util.Map;
 
 public class CommandManager {
 
-    private Map<String, Command> commands = new HashMap<String, Command>();
+    private Map<String, Command> commands;
 
     private Thread thread;
 
     private boolean running;
 
-    private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    private static BufferedReader reader;
 
     private String line;
 
@@ -37,12 +38,15 @@ public class CommandManager {
         try {
             getCommand(args[0]).execute(args);
             return true;
-        } catch (NullPointerException | ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException ex) {
+        } catch (NullPointerException | ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException | IOException ex) {
             return false;
         }
     }
 
-    public void start() {
+    public void start() throws IOException {
+        commands = new HashMap<>();
+        reader = new BufferedReader(new InputStreamReader(System.in));
+        reader.mark(1000);
         registerCommands();
         running = true;
         thread = new Thread(() -> {
@@ -67,9 +71,16 @@ public class CommandManager {
         registerCommand("las", new ServerListCommand());
         registerCommand("listallserver", new ServerListCommand());
         registerCommand("stop", new StopCommand());
+        registerCommand("restart", new RestartCommand());
     }
 
-    public void stop() {
-        thread.stop();
+    private void unRegisterCommands(){
+        commands.clear();
+    }
+
+    public void stop() throws IOException {
+        running = false;
+        unRegisterCommands();
+        reader.reset();
     }
 }

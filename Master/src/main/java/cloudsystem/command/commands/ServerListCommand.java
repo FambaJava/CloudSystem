@@ -18,7 +18,7 @@ public class ServerListCommand implements Command {
 
     private void listAllTeamSpeakServers() throws SQLException {
         System.out.println();
-        System.out.println("NAME - ID | IP-Adress:Port | Password | Online");
+        System.out.println("TEAMSPEAK: NAME - ID | IP-Adress:Port | Password | Online");
         System.out.println();
         Main.getSqlManager().getAllTeamSpeakServers().forEach(teamSpeakServer -> {
             System.out.println(teamSpeakServer.getFullInfo());
@@ -27,7 +27,7 @@ public class ServerListCommand implements Command {
 
     private void listAllMinecraftServers() throws SQLException {
         System.out.println();
-        System.out.println("NAME - ID | IP-Adress:Port | Type | Online");
+        System.out.println("MINECRAFT: NAME - ID | IP-Adress:Port | Type | Online");
         System.out.println();
         Main.getSqlManager().getAllMinecraftServers().forEach(minecraftServer -> {
             System.out.println(minecraftServer.getFullInfo());
