@@ -7,17 +7,19 @@ public class MinecraftServer {
     private String adress;
     private int port;
     private String type;
+    private boolean online;
 
-    public MinecraftServer(String name, int id, String adress, int port, String type) {
+    public MinecraftServer(String name, int id, String adress, int port, String type, boolean online) {
         this.name = name;
         this.id = id;
         this.adress = adress;
         this.port = port;
         this.type = type;
+        this.online = online;
     }
 
     public String getFullInfo() {
-        return name + " - " + id + " | " + adress + ":" + port + " | " + type;
+        return "MINECRAFT: " + name + " - " + id + " | " + adress + ":" + port + " | " + type + " | " + online;
     }
 
     @Override
@@ -33,7 +35,7 @@ public class MinecraftServer {
 
     }
 
-    public boolean isRunning() {
-        return false;
+    public boolean isOnline() {
+        return online;
     }
 }

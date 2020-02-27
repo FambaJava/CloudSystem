@@ -7,17 +7,19 @@ public class TeamSpeakServer {
     private String ipAddress;
     private int port;
     private String password;
+    private boolean online;
 
-    public TeamSpeakServer(String name, int id, String ipAddress, int port, String password) {
+    public TeamSpeakServer(String name, int id, String ipAddress, int port, String password, boolean online) {
         this.name = name;
         this.id = id;
         this.ipAddress = ipAddress;
         this.port = port;
         this.password = password;
+        this.online = online;
     }
 
     public String getFullInfo() {
-        return name + " - " + id + " | " + ipAddress + ":" + port + " | " + password;
+        return "TEAMSPEAK: " + name + " - " + id + " | " + ipAddress + ":" + port + " | " + password + " | " + online;
     }
 
     @Override
@@ -33,7 +35,7 @@ public class TeamSpeakServer {
 
 
     public boolean isServerOnline() {
-        return false;
+        return online;
     }
 
     public void start() {

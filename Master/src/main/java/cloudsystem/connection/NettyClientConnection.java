@@ -15,6 +15,8 @@ public class NettyClientConnection {
     private String host;
     private int port;
 
+    public boolean connected = false;
+
 
     private CommandManager commandManager;
 
@@ -44,8 +46,9 @@ public class NettyClientConnection {
             ChannelFuture channelFuture = bootstrap.connect(host, port).sync();
             commandManager.start();
             System.out.println("Client started");
+            connected = true;
             channelFuture.channel().closeFuture().sync();
-
+            connected = false;
         } catch (Exception ex) {
             System.out.println("Wrapper is offline.");
             System.out.println();

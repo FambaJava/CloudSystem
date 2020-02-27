@@ -21,7 +21,10 @@ public class Main {
     private static CloudClassLoader cloudClassLoader;
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        start();
+    }
 
+    public static void start() throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, SQLException {
         sqlManager = new SQLManager();
 
         connectionManager = new ConnectionManager();
@@ -40,6 +43,8 @@ public class Main {
         getSqlManager().setUpTeamSpeak("test2", "45.2.6.12", 2511, "alskjfjaoisf4");
         getSqlManager().setUpTeamSpeak("test3", "33.34.63.21", 2621, "sdfsdgf3");
 
+        getSqlManager().setUpMinecraft("Lobby-1", "235.32.52.214", 2356, "STATIC");
+        getSqlManager().setUpMinecraft("Lobby-2", "35.23.62.156", 8326, "DYNAMIC");
 
         connectionManager.connect(ConnectionType.Master, connectionManager.getHost());
 

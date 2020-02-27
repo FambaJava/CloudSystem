@@ -15,14 +15,20 @@ public class ConnectionManager {
 
     public void connect(ConnectionType connectionType, String host) {
         serverConnections = new ServerConnections();
-        int port = serverConnections.getWrapper().getPort();
+        if(isNotConnected()){
+            int port = serverConnections.getWrapper().getPort();
 
-        netty = new NettyClientConnection(getHost(), 5004);
-        netty.connect();
+            netty = new NettyClientConnection(getHost(), 5004);
+            netty.connect();
+        }
     }
 
     public void wakeTSUpAndRenewTheAdminKey() {
         netty.wakeTSUpAndRenewTheAdminKey();
+    }
+
+    private boolean isNotConnected(){
+        return !netty.connected;
     }
 
 
