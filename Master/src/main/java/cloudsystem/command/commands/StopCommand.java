@@ -8,7 +8,7 @@ import java.sql.SQLException;
 public class StopCommand implements Command {
 
     @Override
-    public void execute(String[] args) throws SQLException, ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    public void execute(String[] args) throws SQLException{
         Main.stop();
         System.exit(0);
     }

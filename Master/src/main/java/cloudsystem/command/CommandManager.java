@@ -3,6 +3,7 @@ package cloudsystem.command;
 
 import cloudsystem.command.commands.*;
 import cloudsystem.command.listener.Command;
+import org.json.JSONException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -31,11 +32,11 @@ public class CommandManager {
         return commands.get(name);
     }
 
-    private boolean executeCommand(String[] args) throws SQLException, InterruptedException {
+    private boolean executeCommand(String[] args) {
         try {
             getCommand(args[0]).execute(args);
             return true;
-        } catch (NullPointerException | ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException | IOException ex) {
+        }catch (NullPointerException | SQLException | IOException | ClassNotFoundException | JSONException | InterruptedException ex){
             return false;
         }
     }
@@ -52,7 +53,7 @@ public class CommandManager {
                     line = reader.readLine();
                     if (!executeCommand(line.split(" ")))
                         System.out.println("This command does not exist!");
-                } catch (IOException | SQLException | InterruptedException e) {
+                } catch (IOException  e) {
                     e.printStackTrace();
                     return;
                 }

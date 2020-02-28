@@ -6,8 +6,10 @@ import java.util.List;
 
 public class FileManager {
 
-    private File wrapperServerActiveFolder;
-    private File wrapperServerInactiveFolder;
+    private File wrapperMinecraftServerActiveFolder;
+    private File wrapperTeamSpeakServerActiveFolder;
+    private File wrapperMinecraftServerInactiveFolder;
+    private File wrapperTeamSpeakServerInactiveFolder;
 
     private File masterConfig;
     private File wrapperConfig;
@@ -17,10 +19,21 @@ public class FileManager {
     public FileManager() {
         files = new ArrayList<>();
 
-        wrapperServerActiveFolder = new File("Cloud/Wrapper/active/servers");
-        files.add(wrapperServerActiveFolder);
-        wrapperServerInactiveFolder = new File("Cloud/Wrapper/inactive/servers");
-        files.add(wrapperServerInactiveFolder);
+        wrapperMinecraftServerActiveFolder = new File("Cloud/Wrapper/active/servers/minecraft");
+
+        files.add(wrapperMinecraftServerActiveFolder);
+
+        wrapperTeamSpeakServerActiveFolder = new File("Cloud/Wrapper/active/servers/teamspeak");
+
+        files.add(wrapperTeamSpeakServerActiveFolder);
+
+        wrapperMinecraftServerInactiveFolder = new File("Cloud/Wrapper/inactive/servers/minecraft");
+
+        files.add(wrapperMinecraftServerInactiveFolder);
+
+        wrapperTeamSpeakServerInactiveFolder = new File("Cloud/Wrapper/inactive/servers/teamspeak");
+
+        files.add(wrapperTeamSpeakServerInactiveFolder);
 
         masterConfig = new File("Cloud/Master/Configs");
         files.add(masterConfig);

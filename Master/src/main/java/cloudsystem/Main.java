@@ -6,6 +6,7 @@ import cloudsystem.connection.manager.ConnectionManager;
 import cloudsystem.connection.manager.ConnectionType;
 import cloudsystem.database.SQLManager;
 import cloudsystem.filestructure.FileManager;
+import org.json.JSONException;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -21,22 +22,35 @@ public class Main {
 
     private static CloudClassLoader cloudClassLoader;
 
-    public static void main(String[] args) throws SQLException, ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, IOException {
-        start();
+    public static void main(String[] args) throws ClassNotFoundException, IOException, SQLException, JSONException, InterruptedException {
+        start();        //With GUi new MasterGUI();     - In Coding...
     }
 
-    public static void start() throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, SQLException, IOException {
+    public static void start() throws IOException, SQLException, ClassNotFoundException, JSONException {
+
+
+        System.out.println(" ____    ____   ______    ______  __                         __  \n" +
+                "|_   \\  /   _|.' ___  | .' ___  |[  |                       |  ] \n" +
+                "  |   \\/   | / .'   \\_|/ .'   \\_| | |  .--.   __   _    .--.| |  \n" +
+                "  | |\\  /| | | |       | |        | |/ .'`\\ \\[  | | | / /'`\\' |  \n" +
+                " _| |_\\/_| |_\\ `.___.'\\\\ `.___.'\\ | || \\__. | | \\_/ |,| \\__/  |  \n" +
+                "|_____||_____|`.____ .' `.____ .'[___]'.__.'  '.__.'_/ '.__.;__] \n" +
+                "                                                                 ");
+        System.out.println("\n\nCloud is loading...\n");
+
+        fileManager = new FileManager();
+        fileManager.createFilesIfNotExists();
+
         sqlManager = new SQLManager();
 
         connectionManager = new ConnectionManager();
 
-        fileManager = new FileManager();
 
         cloudClassLoader = new CloudClassLoader();
 
-        fileManager.createFilesIfNotExists();
 
-        cloudClassLoader.loadAllClazzes();
+        getSqlManager().init();
+
 
         getSqlManager().openConnection();
 
@@ -46,6 +60,8 @@ public class Main {
 
         getSqlManager().setUpMinecraft("Lobby-1", "235.32.52.214", 2356, "STATIC", 1024);
         getSqlManager().setUpMinecraft("Lobby-2", "35.23.62.156", 8326, "DYNAMIC", 2048);
+
+        System.out.println("Remember when you are starting an Minecraft or TeamSpeak server,you automatically agree their terms.");
 
         connectionManager.connect(ConnectionType.Master, connectionManager.getHost());
 
@@ -63,13 +79,14 @@ public class Main {
         return cloudClassLoader;
     }
 
-    public static void stop() throws SQLException, ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-        getCloudClassLoader().stopAllPlugins();
+
+    public static void stop() {
         try {
             getConnectionManager().getCommandManager().stop();
+            getSqlManager().close();
         } catch (Exception ex) {
-            ex.printStackTrace();
+            System.out.println("There is no connection");
         }
-        getSqlManager().close();
+
     }
 }

@@ -10,7 +10,7 @@ public class NettyClientHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        System.out.println("Connected to server.");
+        System.out.println("Connection to the Wrapper is stable. Some Informations: " + ctx + "\n \nYou are now ready, you can use our commandline tool, if you need help exeute help! \n");
     }
 
     @Override

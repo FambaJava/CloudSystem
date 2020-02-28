@@ -1,0 +1,80 @@
+JFDML JFormDesigner: "7.0.1.0.272" Java: "11.0.4" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
+			"$layoutConstraints": "hidemode 3"
+			"$columnConstraints": "[fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill]"
+			"$rowConstraints": "[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]"
+		} ) {
+			name: "this"
+			"title": "CloudTerminal"
+			"minimumSize": new java.awt.Dimension( 700, 500 )
+			"font": new java.awt.Font( "Lucida Grande", 0, 18 )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "radioButton1"
+				"text": "Console"
+				addEvent( new FormEvent( "java.awt.event.ItemListener", "itemStateChanged", "radioButton1ItemStateChanged", true ) )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "radioButton1ActionPerformed", true ) )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 0 0"
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "radioButton2"
+				"text": "Online Servers"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "radioButton2ActionPerformed", true ) )
+				addEvent( new FormEvent( "javax.swing.event.ChangeListener", "stateChanged", "radioButton2StateChanged", true ) )
+				addEvent( new FormEvent( "java.awt.event.ItemListener", "itemStateChanged", "radioButton2ItemStateChanged", true ) )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 0 4"
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "radioButton3"
+				"text": "Start Server"
+				addEvent( new FormEvent( "java.awt.event.ItemListener", "itemStateChanged", "radioButton3ItemStateChanged", true ) )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "radioButton3ActionPerformed", true ) )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 0 8"
+			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane2"
+				add( new FormComponent( "javax.swing.JTextArea" ) {
+					name: "textArea2"
+					"preferredSize": new java.awt.Dimension( 1000, 500 )
+					"enabled": false
+				} )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 6 9"
+			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane1"
+				add( new FormComponent( "javax.swing.JTextArea" ) {
+					name: "textArea1"
+					"tabSize": 100
+					"minimumSize": new java.awt.Dimension( 1000, 23 )
+					"preferredSize": new java.awt.Dimension( 500, 23 )
+				} )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 6 49 1 12"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label1"
+				"text": "type in your args:"
+				"font": new java.awt.Font( ".SF NS Text", 0, 22 )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 0 52 1 5"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button1"
+				"text": "SEND"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button1ActionPerformed", true ) )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 14 55"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 5 )
+			"size": new java.awt.Dimension( 1460, 1350 )
+		} )
+	}
+}

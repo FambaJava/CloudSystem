@@ -7,7 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="TeamSpeakBot" />
-        <module name="Master" />
+        <module name="CloudMaster" />
         <module name="Wrapper" />
       </profile>
     </annotationProcessing>

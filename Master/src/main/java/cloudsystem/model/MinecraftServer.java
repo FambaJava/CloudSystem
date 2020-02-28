@@ -1,6 +1,8 @@
 package cloudsystem.model;
 
-public class MinecraftServer {
+import cloudsystem.model.server.CloudServer;
+
+public class MinecraftServer extends CloudServer {
 
     private String name;
     private int id;
@@ -29,12 +31,29 @@ public class MinecraftServer {
         return super.toString();
     }
 
-    public void start() {
-
+    public void start(int amount) throws Exception {
+        if (isOnline()) {
+            System.out.println("The Server " + name + " (id= " + id + ") is already online!");
+        } else {
+            //TODO START THE SERVER
+            this.startServer( "MINECRAFT", id, amount, maxRam);
+        }
     }
 
     public void stop() {
+        if(isOnline()){
+            //TODO STOP THE SERVER
+        }else{
+            System.out.println("The Server " + name + " (id= " + id + ") is currently offline!");
+        }
+    }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getAdress() {
+        return adress;
     }
 
     public boolean isOnline() {

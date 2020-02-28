@@ -1,6 +1,8 @@
 package cloudsystem.model;
 
-public class TeamSpeakServer {
+import cloudsystem.model.server.CloudServer;
+
+public class TeamSpeakServer extends CloudServer {
 
     private String name;
     private int id;
@@ -38,11 +40,20 @@ public class TeamSpeakServer {
         return online;
     }
 
-    public void start() {
-
+    public void start(int amount) throws Exception {
+        if (isOnline()) {
+            System.out.println("The Server " + name + " (id= " + id + ") is already online!");
+        } else {
+            //TODO START THE SERVER
+            this.startServer("TEAMSPEAK", id, amount, 0);
+        }
     }
 
     public void stop() {
 
+    }
+
+    private boolean isOnline() {
+        return online;
     }
 }
